@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --text: #ffffff;
+    --cardText: #017cb6;
+    --borderColor: #e7e7e7;
+    --buttonBackground: #ffd814;
+    --headerText: #febd69;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+}
+
+/* header part */
+
+header{
+    height: 50px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 10px ;
+}
+
+.amazon-logo-mobile{
+    display: none;
+    padding: 10px;
+}
+
+.amazon-logo-mobile img{
+    height: 30px;
+    width: 30px;
+}
+
+.amazon-logo{
+    padding: 10px;
+}
+
+.amazon-logo img{
+    height: 30px;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar input{
+    padding: 10.5px;
+    width: 40%;
+    border: none;
+    outline-color: var(--headerText);
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar input:hover{
+    border: 2px solid var(--headerText);
+}
+
+.search-bar i{
+    background-color: var(--headerText);
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+.order-section{
+    text-align: center;
+    color: var(--text);
+    font-size: 0.8rem;
+    width: 100px;
+    padding: 10px;
+}
+
+.order-section span{
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.cart-section{
+    display: flex;
+    color: var(--text);
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+}
+
+.cart-section img{
+    height: 33px;
+}
+
+.cart-items,
+.cart-name{
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.cart-items{
+    position: absolute;
+    font-size: 0.9rem;
+    left: 29%;
+    top: 17%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: var(--headerText);
+}
+
+.cart-section:hover,
+.amazon-logo:hover,
+.order-section:hover{
+    border: 1px solid var(--borderColor);
+}
+
+/* product part */
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.product-card{
+    border: 1px solid var(--borderColor);
+    padding: 20px 30px;
+}
+
+.product-img{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-img img{
+    height: 180px;
+    width: 100%;
+}
+
+.product-info{
+    height: 70px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.review-sec{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.review-sec img{
+    height: 20px;
+}
+
+.review-sec div{
+    color: var(--cardText);
+}
+
+.product-price{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.product-quantity{
+    margin-bottom: 70px;
+}
+
+.product-quantity select{
+    height: 30px;
+    width: 40px;
+    border: none;
+    outline: none;
+}
+
+.add-to-cart-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-to-cart-btn button{
+    padding: 10px 50px;
+    border: none;
+    background-color: var(--buttonBackground);
+    font-weight: 600;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+@media(max-width: 768px){
+    .logo img{
+        height: 20px;
+    }
+
+    .search-bar input{
+        width: 60%;
+    }
+
+    .order-section{
+        width: 120px;
+        font-size: 0.7rem;
+    }
+
+    .order-section span{
+        font-size: 0.8rem;
+    }
+
+    .cart-name{
+        font-size: 0.7rem;
+    }
+
+    .cart-items{
+        left: 31%;
+        font-size: 0.9rem;
+    }
+}
+
+@media(max-width: 480px){
+    .amazon-logo-mobile{
+        display: block;
+    }
+
+    .amazon-logo {
+        display: none;
+    }
+
+    .search-bar input{
+        width: 50%;
+    }
+
+    .search-bar input::placeholder{
+        font-size: 0.7rem;
+    }
+
+    .order-section{
+        width: 120px;
+        font-size: 0.6rem;
+    }
+
+    .order-section span{
+        font-size: 0.7rem;
+    }
+
+    .cart-name{
+        font-size: 0.7rem;
+    }
+
+    .cart-items{
+        left: 31%;
+        font-size: 0.9rem;
+    }
+
+    .cart-section img{
+        height: 31px;
+    }
+}
+
+
+
