@@ -130,6 +130,11 @@ header{
 .product-card{
     border: 1px solid var(--borderColor);
     padding: 20px 30px;
+    transition: 0.2s;
+}
+
+.product-card:hover{
+    box-shadow: 0 0 7px #d9d7d7;
 }
 
 .product-img{
@@ -152,7 +157,7 @@ header{
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .review-sec img{
@@ -241,7 +246,7 @@ header{
     }
 
     .order-section{
-        width: 120px;
+        width: 130px;
         font-size: 0.6rem;
     }
 
@@ -260,6 +265,28 @@ header{
 
     .cart-section img{
         height: 31px;
+    }
+
+    .cards{
+        padding: 10px 30px;
+    }
+
+    .product-img img{
+        height: 120px;
+        width: 50%;
+    }
+
+    .product-info{
+        height: 40px;
+        font-weight: 500;
+    }
+
+    .review-sec img{
+        height: 20px;
+    }
+
+    .review-sec div{
+        font-size: 0.9rem;
     }
 }
 
