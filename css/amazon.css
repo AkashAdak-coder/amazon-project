@@ -26,6 +26,11 @@ header{
     padding: 10px ;
 }
 
+header a{
+    color: #fff;
+    text-decoration: none;
+}
+
 .amazon-logo-mobile{
     display: none;
     padding: 10px;
@@ -83,12 +88,13 @@ header{
 }
 
 .cart-section{
-    display: flex;
-    color: var(--text);
-    align-items: center;
-    justify-content: center;
     position: relative;
     padding: 10px;
+}
+
+.cart-section a{
+    display: flex;
+    align-items: center;
 }
 
 .cart-section img{
