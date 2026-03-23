@@ -1,11 +1,11 @@
 import { products } from "../data/products.js";
-import { cart } from "../data/cart.js"; 
+import { cart, addToCart, cartItemCount } from "../data/cart.js"; 
 
 let productHTML = ' ';
 
 products.forEach( (product) => {
     productHTML += `
-        <div class=" product-card">
+        <div class="product-card">
             <div class="product-img">
                 <img src="${product.image}">
             </div>
@@ -24,7 +24,7 @@ products.forEach( (product) => {
             </div>
 
             <div class="product-quantity">
-                <select>
+                <select class="quantity-option-js">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -39,47 +39,19 @@ products.forEach( (product) => {
         </div>`;
 });
 
-function cartItemCount(){
-    let count = 0;
-
-    cart.forEach( (cartItem) =>{
-        count++;
-    });
-
-    document.querySelector('.cart-items').innerHTML = count;
-}
-
-function addToCart(productId){
-    let matchingItem;
-
-    cart.forEach( (cartItem) =>{
-        if(cartItem.productId === productId){
-            matchingItem = cartItem;
-        }
-    });
-
-    if(matchingItem){
-        matchingItem.quantity++;
-    } else {
-        cart.push(
-            {
-                productId: productId,
-                quantity: 1
-            }
-        );
-    } 
-}
 
 document.querySelector('.cards').innerHTML = productHTML;
 
 document.querySelectorAll('.add-to-cart-btn-js').forEach((button) => {
     button.addEventListener('click', () =>{
         let productId = button.dataset.productId;
+        let productCard = button.closest('.product-card');
+        let selectElement = productCard.querySelector('.quantity-option-js');
+        let quantity = Number(selectElement.value);
         
-        addToCart(productId);
+        addToCart(productId,quantity);
         cartItemCount();
 
         console.log(cart);
-        
     });    
 });
