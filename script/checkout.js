@@ -1,4 +1,4 @@
-import { cart } from '../data/cart.js';
+import { cart, cartItemCount } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 let cartHTML = '';
@@ -72,3 +72,4 @@ cart.forEach( (cartItem) =>{
 });
 
 document.querySelector('.cart-items').innerHTML = cartHTML;
+document.querySelector('.js-cart-item-count').innerText = `${cartItemCount()} items`;

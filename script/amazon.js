@@ -50,7 +50,8 @@ document.querySelectorAll('.add-to-cart-btn-js').forEach((button) => {
         let quantity = Number(selectElement.value);
         
         addToCart(productId,quantity);
-        cartItemCount();
+        let count = cartItemCount();
+        document.querySelector('.cart-items').innerHTML = count;
 
         console.log(cart);
     });    
