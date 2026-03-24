@@ -52,7 +52,5 @@ document.querySelectorAll('.add-to-cart-btn-js').forEach((button) => {
         addToCart(productId,quantity);
         let count = cartItemCount();
         document.querySelector('.cart-items').innerHTML = count;
-
-        console.log(cart);
     });    
 });

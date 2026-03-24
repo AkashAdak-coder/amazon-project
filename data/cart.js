@@ -1,6 +1,5 @@
 export let cart = JSON.parse(localStorage.getItem('cart'));
-
-if(!cart){
+if (!cart){
     cart = [
         {
             productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -48,4 +47,18 @@ export function addToCart(productId,quantity){
 
 function storeCartInLocalStorage(cart){
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+export function deleteCartItem(deleteId){
+    let newCart = [];
+
+    cart.forEach( (cartItem) =>{
+        if(cartItem.productId !== deleteId){
+            newCart.push(cartItem);
+        }
+    })
+
+    cart = newCart;
+    storeCartInLocalStorage(cart);
+    console.log(cart);
 }

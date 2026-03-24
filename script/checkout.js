@@ -1,4 +1,4 @@
-import { cart, cartItemCount } from '../data/cart.js';
+import { cart, cartItemCount, deleteCartItem } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 let cartHTML = '';
@@ -27,7 +27,7 @@ cart.forEach( (cartItem) =>{
                 <div class="img-info">
                     <div>${matchingItem.name}</div>
                     <div class="item-price">$${(matchingItem.priceCents / 100).toFixed(2)}</div>
-                    <div>Quantity: ${cartItem.quantity} <a href="#">Upadte</a> <a href="#">Delete</a></div>
+                    <div>Quantity: ${cartItem.quantity} <a href="#">Upadte</a> <a href="#" class='js-cartItem-delete-link' data-product-id='${matchingItem.id}'>Delete</a></div>
                 </div>
             </div>
 
@@ -73,3 +73,15 @@ cart.forEach( (cartItem) =>{
 
 document.querySelector('.cart-items').innerHTML = cartHTML;
 document.querySelector('.js-cart-item-count').innerText = `${cartItemCount()} items`;
+
+document.querySelectorAll('.js-cartItem-delete-link').forEach( (deleteButton) =>{
+    deleteButton.addEventListener('click',() =>{
+        let deleteId = deleteButton.dataset.productId;
+        deleteCartItem(deleteId);
+
+        let cartItemElement = deleteButton.closest('.cart-item');
+        cartItemElement.remove();
+
+        document.querySelector('.js-cart-item-count').innerText = `${cartItemCount()} items`;
+    })
+})
