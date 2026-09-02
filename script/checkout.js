@@ -1,87 +1,73 @@
-import { cart, cartItemCount, deleteCartItem } from '../data/cart.js';
-import { products } from '../data/products.js';
+import {cart,cartItemCount} from '../data/cart.js';
+import {products} from '../data/products.js';
 
-let cartHTML = '';
+let matchingItem;
+let cartHtml = '';
 
-cart.forEach( (cartItem) =>{
-    let productId = cartItem.productId;
+cart.forEach( item => {
+  products.forEach( product => {
+    if(product.id === item.productId){
+      matchingItem = product;
+      console.log(matchingItem);
+    }
+  });
 
-    let matchingItem;
-
-    products.forEach( (product) =>{
-        if(product.id === productId){
-            matchingItem = product;
-        }
-    })
-
-    cartHTML += `<div class="cart-item">
-        <div class="delivery-date">
-            Delivery date: Tuesday, June 21
-        </div>
-        <div class="delivery-item-info">
-            <div class="item-info">
-                <div class="item-img">
-                    <img src="${matchingItem.image}">
-                </div>
-
-                <div class="img-info">
-                    <div>${matchingItem.name}</div>
-                    <div class="item-price">$${(matchingItem.priceCents / 100).toFixed(2)}</div>
-                    <div>Quantity: ${cartItem.quantity} <a href="#">Upadte</a> <a href="#" class='js-cartItem-delete-link' data-product-id='${matchingItem.id}'>Delete</a></div>
-                </div>
+  cartHtml += 
+  ` <div class="cart">
+      <div class="delivary-date">
+        Delivery date: Tuesday, June 21
+      </div>
+      <div class="cart-info">
+        <div class="product-info">
+          <img src="${matchingItem.image}" alt="product image">
+          <div class="info">
+            <div>
+              ${matchingItem.name} 
             </div>
-
-            <div class="date-info">
-                <div>Choose a delivery option:</div>
-
-                <div class="date">
-                    <div>
-                        <input type="radio" name="${matchingItem.id}">
-                    </div>
-
-                    <div>
-                        <div>Tuesday, June 21</div>
-                        <div>FREE Shipping</div>
-                    </div>
-                </div>
-
-                <div class="date">
-                    <div>
-                        <input type="radio" name="${matchingItem.id}">
-                    </div>
-
-                    <div>
-                        <div>Wednesday, June 15</div>
-                        <div>$4.99 - Shipping</div>
-                    </div>
-                </div>
-
-                <div class="date">
-                    <div>
-                        <input type="radio" name="${matchingItem.id}">
-                    </div>
-
-                    <div>
-                        <div>Monday, June 13</div>
-                        <div>$9.99 - Shipping</div>
-                    </div>
-                </div>
+            <div class="product-price">
+              $${((matchingItem.priceCents)/100).toFixed(2)}
             </div>
+            <div>
+              Quantity: ${item.quantity} 
+              <button>Update</button>
+              <button>Delete</button>
+            </div>
+          </div>
         </div>
-    </div>`;  
+
+        <div class="delivery-info">
+          <h3>Choose a delivery option:</h3>
+          <div class="delivery-option">
+            <input type="radio" name="${matchingItem.id}">
+
+            <div class="delivery-time">
+              <div>Tuesday, June 21</div>
+              <div>FREE Shipping</div>
+            </div>
+          </div>
+
+          <div class="delivery-option">
+            <input type="radio" name="${matchingItem.id}">
+
+            <div class="delivery-time">
+              <div>Wednesday, June 15</div>
+              <div>$4.99 - Shipping</div>
+            </div>
+          </div>
+
+          <div class="delivery-option">
+            <input type="radio" name="${matchingItem.id}">
+
+            <div class="delivery-time">
+              <div>Monday, June 13</div>
+              <div>$9.99 - Shipping</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 });
 
-document.querySelector('.cart-items').innerHTML = cartHTML;
-document.querySelector('.js-cart-item-count').innerText = `${cartItemCount()} items`;
-
-document.querySelectorAll('.js-cartItem-delete-link').forEach( (deleteButton) =>{
-    deleteButton.addEventListener('click',() =>{
-        let deleteId = deleteButton.dataset.productId;
-        deleteCartItem(deleteId);
-
-        let cartItemElement = deleteButton.closest('.cart-item');
-        cartItemElement.remove();
-
-        document.querySelector('.js-cart-item-count').innerText = `${cartItemCount()} items`;
-    })
-})
+document.querySelector('.cart-item-container').innerHTML = cartHtml;
+document.querySelector('.js-cart-item').textContent = `${cartItemCount()} items`;

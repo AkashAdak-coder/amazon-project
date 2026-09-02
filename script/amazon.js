@@ -1,56 +1,58 @@
-import { products } from "../data/products.js";
-import { cart, addToCart, cartItemCount } from "../data/cart.js"; 
+import {products} from '../data/products.js';
+import {cart,cartItemCount,addToCart} from '../data/cart.js';
 
-let productHTML = ' ';
+let productsHTML = '';
+products.forEach(product => {
+  productsHTML += `
+    <div class="product-item">
+      <img src="${product.image}" alt="${product.name}">
 
-products.forEach( (product) => {
-    productHTML += `
-        <div class="product-card">
-            <div class="product-img">
-                <img src="${product.image}">
-            </div>
+      <div class="product-info">
+        ${product.name}
+      </div>
 
-            <div class="product-info">
-                ${product.name}
-            </div>
+      <div class="product-review">
+        <img src="images/ratings/rating-${(product.rating.stars)*10}.png" class="rating">
+        <div class="review-count">${product.rating.count}</div>
+      </div>
 
-            <div class="review-sec">
-                <img src="images/ratings/rating-${(product.rating.stars) * 10}.png" alt="review-image">
-                <div class="review-count">${product.rating.count}</div>
-            </div>
+      <div class="product-price">$${((product.priceCents)/100).toFixed(2)}</div>
 
-            <div class="product-price">$
-                ${((product.priceCents) / 100).toFixed(2)}
-            </div>
+      <select class="my-select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
 
-            <div class="product-quantity">
-                <select class="quantity-option-js">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
+      <div class="button-section">
+        <button class="add-to-cart-btn" data-id="${product.id}">Add To Cart</button>
+      </div>
+    </div>
+  `;
+})
 
-            <div class="add-to-cart-btn">
-                <button data-product-id="${product.id}" class="add-to-cart-btn-js">Add To Cart</button>
-            </div>
-        </div>`;
+document.querySelector('.products').innerHTML = productsHTML;
+
+document.querySelectorAll('.add-to-cart-btn').forEach( button => {
+  button.addEventListener('click', ()=>{
+    let productId = button.dataset.id;
+    if(!quantity){
+      quantity = 1;
+    }
+    addToCart(productId,quantity);
+
+    document.querySelector('.cart-item').textContent = cartItemCount();
+    console.log(cart);
+  });
 });
 
-
-document.querySelector('.cards').innerHTML = productHTML;
-
-document.querySelectorAll('.add-to-cart-btn-js').forEach((button) => {
-    button.addEventListener('click', () =>{
-        let productId = button.dataset.productId;
-        let productCard = button.closest('.product-card');
-        let selectElement = productCard.querySelector('.quantity-option-js');
-        let quantity = Number(selectElement.value);
-        
-        addToCart(productId,quantity);
-        let count = cartItemCount();
-        document.querySelector('.cart-items').innerHTML = count;
-    });    
+let selects = document.querySelectorAll('.my-select');
+let quantity;
+selects.forEach( select => {
+  select.addEventListener('change', (event) =>{
+    quantity = Number(event.target.value);
+  });
 });
